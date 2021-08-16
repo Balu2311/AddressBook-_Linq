@@ -12,7 +12,7 @@ namespace AddressBookSystem_Linq
             dataTable.CreateTable(model);
             while (true)
             {
-                Console.WriteLine("\nEnter Choice  \n1.Add Contact \n2.Display \n3.Edit Contact\n4. DeletContact \n5.Exit ");
+                Console.WriteLine("\nEnter Choice  \n1.Add Contact \n2.Display \n3.Edit Contact\n4. DeletContact \n5.ContactFrom_City \n6.ContactsFrom_State\n7.Exit ");
                 int choise = Convert.ToInt32(Console.ReadLine());
                 try
                 {
@@ -65,6 +65,18 @@ namespace AddressBookSystem_Linq
                             dataTable.DeleteContact(model);
                             break;
                         case 5:
+                            Console.WriteLine("Enter the city :");
+                            model.City = Console.ReadLine();
+                            dataTable.RetrievePersonByUsingCity(model);
+                            Console.WriteLine("Contacts_From_City");
+                            break;
+                        case 6:
+                            Console.WriteLine("Enter the State : ");
+                            model.State = Console.ReadLine();
+                            dataTable.RetrievePersonByUsingState(model);
+                            Console.WriteLine("Contacts_From_State");
+                            break;
+                        case 7:
                             Environment.Exit(0);
                             break;
                         default:

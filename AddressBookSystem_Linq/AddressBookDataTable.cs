@@ -28,7 +28,7 @@ namespace AddressBookSystem_Linq
             var taleColumn8 = new DataColumn("Email");
             dataTable.Columns.Add(taleColumn8);
             
-            dataTable.Rows.Add("Balu", "Reddy", "Lkdkr", "Ongl", "AP", "523115", "9876543210", "vbn@gmail.com");
+            dataTable.Rows.Add("Balu", "Reddy", "kdkr", "Ongl", "AP", "523115", "9876543210", "vbn@gmail.com");
             dataTable.Rows.Add("Siva", "Reddy", "N.Peta", "Gunturu", "AP", "526321", "6547890567", "siava@gmail.com");
             dataTable.Rows.Add("Dipika", "Pilli", "Chennai", "mahabaliPuram", "TN", "654342", "9632154564", "dipika@gmail.com");
             dataTable.Rows.Add("Mahesh", "Babu", "Banjarahiils", "Hyderabad", "TS", "500562", "8529631523", "mb@gmail.com");
@@ -79,6 +79,37 @@ namespace AddressBookSystem_Linq
                 Console.WriteLine("Contact Deleted Successfully....");
             }
         }
+        public void RetrievePersonByUsingState(AddressBookModel model)
+        {
+            var selectdData = from dataTable in dataTable.AsEnumerable().Where((dataTable => dataTable.Field<string>("State") == model.State)) select dataTable;
+            foreach (var table in selectdData.AsEnumerable())
+            {
+                Console.WriteLine("\nFirstName: " + table.Field<string>("First_Name"));
+                Console.WriteLine("LastName: " + table.Field<string>("Last_Name"));
+                Console.WriteLine("Address: " + table.Field<string>("Address"));
+                Console.WriteLine("City: " + table.Field<string>("City"));
+                Console.WriteLine("State: " + table.Field<string>("State"));
+                Console.WriteLine("ZipCode: " + table.Field<string>("Zip"));
+                Console.WriteLine("PhoneNumber: " + table.Field<string>("Phone_Number"));
+                Console.WriteLine("E-mail: " + table.Field<string>("Email"));
+            }
+        }
+        public void RetrievePersonByUsingCity(AddressBookModel model)
+        {
+            var selectdData = from dataTable in dataTable.AsEnumerable().Where(dataTable => dataTable.Field<string>("City") == model.City) select dataTable;
+            foreach (var table in selectdData.AsEnumerable())
+            {
+                Console.WriteLine("\nFirstName: " + table.Field<string>("First_Name"));
+                Console.WriteLine("LastName: " + table.Field<string>("Last_Name"));
+                Console.WriteLine("Address: " + table.Field<string>("Address"));
+                Console.WriteLine("City: " + table.Field<string>("City"));
+                Console.WriteLine("State: " + table.Field<string>("State"));
+                Console.WriteLine("ZipCode: " + table.Field<string>("Zip"));
+                Console.WriteLine("PhoneNumber: " + table.Field<string>("Phone_Number"));
+                Console.WriteLine("E-mail: " + table.Field<string>("Email"));
+            }
+        }
+
     }
 }
 
