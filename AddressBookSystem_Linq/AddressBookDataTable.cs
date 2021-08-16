@@ -109,7 +109,21 @@ namespace AddressBookSystem_Linq
                 Console.WriteLine("E-mail: " + table.Field<string>("Email"));
             }
         }
-
+        public void CountByCityAndState()
+        {
+            var countByCityAndState = from row in dataTable.AsEnumerable()
+                                      group row by new { City = row.Field<string>("City"), State = row.Field<string>("State") } into groups
+                                      select new
+                                      {
+                                          City = groups.Key.City,
+                                          State = groups.Key.State,
+                                          Count = groups.Count()
+                                      };
+            foreach (var row in countByCityAndState)
+            {
+                Console.WriteLine(row.City + "  " + row.State + "--->" + row.Count);
+            }
+        }
     }
 }
 
