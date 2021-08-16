@@ -12,7 +12,7 @@ namespace AddressBookSystem_Linq
             dataTable.CreateTable(model);
             while (true)
             {
-                Console.WriteLine("\nEnter Choice  \n1.Add Contact \n2.Display \n3.Edit Contact\n4. DeletContact \n5.ContactFrom_City \n6.ContactsFrom_State\n7.CountByCityOrState\n8.Sort_Contacts\n9.CountBy_AddressBook_Type\n10.Exit ");
+                Console.WriteLine("\nEnter Choice  \n1.Add Contact \n2.Display \n3.Edit Contact\n4. DeletContact \n5.ContactFrom_City \n6.ContactsFrom_State\n7.CountByCityOrState\n8.Sort_Contacts\n9.CountBy_AddressBook_Type\n10.RetrieveByUsingBookTypen\n11.Exit ");
                 int choise = Convert.ToInt32(Console.ReadLine());
                 try
                 {
@@ -87,8 +87,12 @@ namespace AddressBookSystem_Linq
                         case 9:
                             dataTable.GetCountByAddressBookType();
                             break;
-
                         case 10:
+                            Console.WriteLine("Enter the BookType : ");
+                            model.State = Console.ReadLine();
+                            dataTable.RetrieveByUsingBookType(model);
+                            break;
+                        case 11:
                             Environment.Exit(0);
                             break;
                         default:
