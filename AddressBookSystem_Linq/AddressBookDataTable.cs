@@ -27,13 +27,17 @@ namespace AddressBookSystem_Linq
             dataTable.Columns.Add(taleColumn7);
             var taleColumn8 = new DataColumn("Email");
             dataTable.Columns.Add(taleColumn8);
-            
-            dataTable.Rows.Add("Balu", "Reddy", "kdkr", "Ongl", "AP", "523115", "9876543210", "vbn@gmail.com");
-            dataTable.Rows.Add("Siva", "Reddy", "N.Peta", "Gunturu", "AP", "526321", "6547890567", "siava@gmail.com");
-            dataTable.Rows.Add("Dipika", "Pilli", "Chennai", "mahabaliPuram", "TN", "654342", "9632154564", "dipika@gmail.com");
-            dataTable.Rows.Add("Mahesh", "Babu", "Banjarahiils", "Hyderabad", "TS", "500562", "8529631523", "mb@gmail.com");
-            dataTable.Rows.Add("Vishal", "Gunni", "Marthali", "Banglore", "Karanataka", "500056", "9632544570", "vishal@gmail.com");
-            dataTable.Rows.Add("Ganesh", "Reddy", "vesarpadi", "Chennai", "TamilNadu", "600341", "97456321011", "reddy@gmail.com");
+            var tableColumn9 = new DataColumn("BookName");
+            dataTable.Columns.Add(tableColumn9);
+            var tableColumn10 = new DataColumn("BookType");
+            dataTable.Columns.Add(tableColumn10);
+
+            dataTable.Rows.Add("Balu", "Reddy", "kdkr", "Ongl", "AP", "523115", "9876543210", "vbn@gmail.com","address001","family");
+            dataTable.Rows.Add("Siva", "Reddy", "N.Peta", "Gunturu", "AP", "526321", "6547890567", "siava@gmail.com","address001","family");
+            dataTable.Rows.Add("Dipika", "Pilli", "Chennai", "mahabaliPuram", "TN", "654342", "9632154564", "dipika@gmail.com","address002","friend");
+            dataTable.Rows.Add("Mahesh", "Babu", "Banjarahiils", "Hyderabad", "TS", "500562", "8529631523", "mb@gmail.com","address003","office");
+            dataTable.Rows.Add("Vishal", "Gunni", "Marthali", "Banglore", "Karanataka", "500056", "9632544570", "vishal@gmail.com","address003","office");
+            dataTable.Rows.Add("Ganesh", "Reddy", "vesarpadi", "Chennai", "TamilNadu", "600341", "97456321011", "reddy@gmail.com","address003","friend");
             return dataTable;
         }
         public void AddContact(AddressBookModel model)
@@ -137,6 +141,19 @@ namespace AddressBookSystem_Linq
                 Console.WriteLine("ZipCode: " + table.Field<string>("Zip"));
                 Console.WriteLine("PhoneNumber: " + table.Field<string>("Phone_Number"));
                 Console.WriteLine("E-mail: " + table.Field<string>("Email"));
+            }
+        }
+        public void GetCountByAddressBookType()
+        {
+            var countData = dataTable.AsEnumerable().GroupBy(BookType => BookType.Field<string>("BookType")).
+                Select(BookType => new
+                {
+                    BookType = BookType.Key,
+                    BookTypeCount = BookType.Count()
+                });
+            foreach (var contactlist in countData)
+            {
+                Console.WriteLine("AddressBook Type =" + contactlist.BookType + " --> " + "AddressBook_Count = " + contactlist.BookTypeCount);
             }
         }
     }
